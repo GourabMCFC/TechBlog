@@ -1,0 +1,8 @@
+# Ignore IDE-specific files (Eclipse)
+.classpath
+.project
+.settings/
+.metadata/
+
+# Ignore Maven's build output directory
+target/

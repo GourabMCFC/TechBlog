@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>TechBlog Web Application</display-name>
+	<resource-ref>
+		<description>DB - MySQL Connection</description>
+		<res-ref-name>JDS</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
+	<!-- 404 Error -->
+	<error-page>
+		<error-code>404</error-code>
+		<location>/404_page.jsp</location>
+	</error-page>
+
+	<!-- filter for checking if the already logged in user is trying to open 
+		the login/Sign-UP again -->
+	<filter>
+		<filter-name>AuthChecker</filter-name>
+		<filter-class>com.gourab.filters.AuthChecker</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthChecker</filter-name>
+		<url-pattern>/login.jsp</url-pattern>
+		<url-pattern>/login</url-pattern>
+		<url-pattern>/signup.jsp</url-pattern>
+		<url-pattern>/signup</url-pattern>
+	</filter-mapping>
+
+	<!-- Sign-Up -->
+	<filter>
+		<filter-name>SignupValidator</filter-name>
+		<filter-class>com.gourab.filters.SignupValidator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>SignupValidator</filter-name>
+		<url-pattern>/signup</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>RegisterUser</servlet-name>
+		<servlet-class>com.gourab.servlets.RegisterUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RegisterUser</servlet-name>
+		<url-pattern>/signup</url-pattern>
+	</servlet-mapping>
+
+	<!-- login -->
+	<filter>
+		<filter-name>LoginValidator</filter-name>
+		<filter-class>com.gourab.filters.LoginValidator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>LoginValidator</filter-name>
+		<url-pattern>/login</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>LoginUser</servlet-name>
+		<servlet-class>com.gourab.servlets.LoginUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LoginUser</servlet-name>
+		<url-pattern>/login</url-pattern>
+	</servlet-mapping>
+
+	<!-- route protection from authentication -->
+	<filter>
+		<filter-name>AuthProtection</filter-name>
+		<filter-class>com.gourab.filters.AuthProtection</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AuthProtection</filter-name>
+		<url-pattern>/profile.jsp</url-pattern>
+		<url-pattern>/category.jsp</url-pattern>
+		<url-pattern>/addcategory.jsp</url-pattern>
+		<url-pattern>/addblog.jsp</url-pattern>
+		<url-pattern>/logout</url-pattern>
+		<url-pattern>/editInfo</url-pattern>
+		<url-pattern>/changepwd</url-pattern>
+		<url-pattern>/deleteaccount</url-pattern>
+		<url-pattern>/addcategory</url-pattern>
+		<url-pattern>/editcategory</url-pattern>
+		<url-pattern>/deletecategory</url-pattern>
+		<url-pattern>/addpost</url-pattern>
+		<url-pattern>/likepost</url-pattern>
+		<url-pattern>/dislikepost</url-pattern>
+	</filter-mapping>
+
+	<!-- edit information -->
+	<filter>
+		<filter-name>EditValidator</filter-name>
+		<filter-class>com.gourab.filters.EditValidator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EditValidator</filter-name>
+		<url-pattern>/editInfo</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>EditInfoServlet</servlet-name>
+		<servlet-class>com.gourab.servlets.EditInfo</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditInfoServlet</servlet-name>
+		<url-pattern>/editInfo</url-pattern>
+	</servlet-mapping>
+
+	<!-- Change Password -->
+	<filter>
+		<filter-name>ChangePasswordValidator</filter-name>
+		<filter-class>com.gourab.filters.ChangePasswordValidator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ChangePasswordValidator</filter-name>
+		<url-pattern>/changepwd</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>ChangePassword</servlet-name>
+		<servlet-class>com.gourab.servlets.ChangePassword</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ChangePassword</servlet-name>
+		<url-pattern>/changepwd</url-pattern>
+	</servlet-mapping>
+
+	<!-- delete account -->
+	<servlet>
+		<servlet-name>DeleteUser</servlet-name>
+		<servlet-class>com.gourab.servlets.DeleteUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteUser</servlet-name>
+		<url-pattern>/deleteaccount</url-pattern>
+	</servlet-mapping>
+
+	<!-- logout servlet -->
+	<servlet>
+		<servlet-name>LogoutUser</servlet-name>
+		<servlet-class>com.gourab.servlets.LogoutUser</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LogoutUser</servlet-name>
+		<url-pattern>/logout</url-pattern>
+	</servlet-mapping>
+
+	<!-- add post -->
+	<filter>
+		<filter-name>BlogValidator</filter-name>
+		<filter-class>com.gourab.filters.BlogValidator</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>BlogValidator</filter-name>
+		<url-pattern>/addpost</url-pattern>
+		<url-pattern>/editpost</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>AddPost</servlet-name>
+		<servlet-class>com.gourab.servlets.AddPost</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddPost</servlet-name>
+		<url-pattern>/addpost</url-pattern>
+	</servlet-mapping>
+	<!-- edit post -->
+	<servlet>
+		<servlet-name>UpdatePost</servlet-name>
+		<servlet-class>com.gourab.servlets.UpdatePost</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>UpdatePost</servlet-name>
+		<url-pattern>/editpost</url-pattern>
+	</servlet-mapping>
+
+	<!-- like a post -->
+	<servlet>
+		<servlet-name>LikePost</servlet-name>
+		<servlet-class>com.gourab.servlets.LikePost</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>LikePost</servlet-name>
+		<url-pattern>/likepost</url-pattern>
+	</servlet-mapping>
+
+	<!-- dislike post a post -->
+	<servlet>
+		<servlet-name>DislikePost</servlet-name>
+		<servlet-class>com.gourab.servlets.DislikePost</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DislikePost</servlet-name>
+		<url-pattern>/dislikepost</url-pattern>
+	</servlet-mapping>
+
+	<!-- delete post -->
+	<servlet>
+		<servlet-name>DeletePost</servlet-name>
+		<servlet-class>com.gourab.servlets.DeletePost</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeletePost</servlet-name>
+		<url-pattern>/deletepost</url-pattern>
+	</servlet-mapping>
+
+
+
+	<!-- filter to check if the logged in user is an admin or not -->
+	<filter>
+		<filter-name>AdminChecker</filter-name>
+		<filter-class>com.gourab.filters.AdminChecker</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>AdminChecker</filter-name>
+		<url-pattern>/category.jsp</url-pattern>
+		<url-pattern>/addcategory.jsp</url-pattern>
+		<url-pattern>/addcategory</url-pattern>
+		<url-pattern>/editcategory</url-pattern>
+		<url-pattern>/deletecategory</url-pattern>
+	</filter-mapping>
+
+	<!-- add category -->
+	<filter>
+		<filter-name>CategoryFilter</filter-name>
+		<filter-class>com.gourab.filters.CategoryFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>CategoryFilter</filter-name>
+		<url-pattern>/addcategory</url-pattern>
+		<url-pattern>/editcategory</url-pattern>
+	</filter-mapping>
+	<servlet>
+		<servlet-name>AddCategory</servlet-name>
+		<servlet-class>com.gourab.servlets.AddCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AddCategory</servlet-name>
+		<url-pattern>/addcategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- edit category -->
+	<servlet>
+		<servlet-name>EditCategory</servlet-name>
+		<servlet-class>com.gourab.servlets.EditCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EditCategory</servlet-name>
+		<url-pattern>/editcategory</url-pattern>
+	</servlet-mapping>
+
+	<!-- delete category -->
+	<servlet>
+		<servlet-name>DeleteCategory</servlet-name>
+		<servlet-class>com.gourab.servlets.DeleteCategory</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DeleteCategory</servlet-name>
+		<url-pattern>/deletecategory</url-pattern>
+	</servlet-mapping>
+
+
+
+</web-app>

@@ -1,0 +1,106 @@
+@charset "UTF-8";
+body{
+	background-color:#d5dee0;
+}
+.card{
+/* From https://css.glass */
+background: transparent;
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(9.7px);
+-webkit-backdrop-filter: blur(9.7px);
+border: 1px solid rgba(213, 222, 224, 0.52);
+}
+.clipPath {
+  clip-path: polygon(
+    20% 0%,
+    80% 0%,
+    100% 0,
+    100% 91%,
+    66% 100%,
+    34% 91%,
+    0 100%,
+    0 0
+  );
+
+  @media only screen and (min-width: 576px) {
+    clip-path: polygon(
+      20% 0%,
+      80% 0%,
+      100% 0,
+      100% 87%,
+      66% 100%,
+      34% 87%,
+      0 100%,
+      0 0
+    );
+  }
+
+  @media only screen and (min-width: 992px) {
+    clip-path: polygon(
+      20% 0%,
+      80% 0%,
+      100% 0,
+      100% 83%,
+      66% 100%,
+      34% 83%,
+      0 100%,
+      0 0
+    );
+  }
+}
+.form-floating > label::after {
+    background-color: transparent !important;
+}
+.w-90 {
+  width: 90%;
+}
+.hide {
+  display: none;
+}
+.table-row-border tr {
+  border-bottom: 1px solid #fff;
+}
+.profile-img {
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top;
+  width: 10rem;
+  height: 10rem;
+  margin-bottom: 1rem;
+  
+  @media only screen and (min-width: 576px) {
+    width: 12rem;
+    height: 12rem;
+  }  
+}
+.category-img{
+  object-fit: cover;
+  object-position: center;
+  width: full;
+  height: 18rem;
+}
+.blog-img{
+  object-fit: cover;
+  object-position: center;
+  width: 90%;
+  height: 17rem;
+  
+  @media only screen and (min-width: 576px) {
+    height: 25rem;
+  }
+  
+   @media only screen and (min-width: 992px) {
+    height: 33rem;
+  }
+}
+.my-width-50 {
+  width: 100%;
+  @media only screen and (min-width: 576px) {
+    width: 50%;
+  }
+
+  @media only screen and (min-width: 992px) {
+    width: auto;
+  }
+}
